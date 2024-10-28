@@ -1,0 +1,11 @@
+# Build output
+dist
+
+# General files
+node_modules
+package-lock.json
+
+# MacOS-generated files
+.DS_Store
+
+.env
