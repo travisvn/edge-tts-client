@@ -1,0 +1,65 @@
+name: Node.js Package
+
+on:
+  push:
+    tags:
+      - '*' # Trigger when any tag is pushed
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the code
+      - uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      # Step 3: Cache npm dependencies
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Step 4: Install dependencies
+      - run: npm install
+
+      # Step 5: Run build script
+      - run: npm run build
+
+      # Step 6: Run tests
+      - run: npm run test
+
+  publish-npm:
+    name: Publish to npm
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/') # Ensure only runs on tag push
+
+    steps:
+      # Step 1: Check out the code
+      - uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js and npm registry
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          registry-url: 'https://registry.npmjs.org/'
+
+      # Step 3: Install dependencies
+      - run: npm install
+
+      # Step 4: Run build script (ensures built files are up-to-date)
+      - run: npm run build
+
+      # Step 5: Publish to npm
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

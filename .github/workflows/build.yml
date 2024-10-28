@@ -1,0 +1,43 @@
+name: Build
+
+on:
+  # Trigger the workflow on push to main branch
+  push:
+    branches:
+      - main
+  # Trigger the workflow on pull request events
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run build
+      - name: Build package
+        run: npm run build
+
+      # Step 5: Run tests
+      - name: Run tests
+        run: npm run test
+
+      # Step 6: Verify type definitions
+      - name: Check TypeScript declarations
+        run: tsc --noEmit
