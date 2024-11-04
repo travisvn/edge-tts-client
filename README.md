@@ -94,7 +94,3 @@ npm run test
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request for any changes or improvements.
-
-## License
-
-MIT License
