@@ -1,6 +1,8 @@
-# EdgeTTSClient
+# Microsoft Edge Text-to-Speech Client
 
 A TypeScript-based client for interacting with Microsoft Edge's Text-to-Speech (TTS) API. This package is compatible with both **Node.js** and **browser environments**, making it versatile for various use cases.
+
+https://www.npmjs.com/package/edge-tts-client 
 
 ## Features
 - 🎙️ **Text-to-Speech**: Synthesize speech from text using Microsoft's Edge TTS API.
