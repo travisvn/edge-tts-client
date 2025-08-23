@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> Use the improved version — [edge-tts-universal](https://github.com/travisvn/edge-tts-universal)
+
+---
+
 # Microsoft Edge Text-to-Speech Client
 
 A TypeScript-based client for interacting with Microsoft Edge's Text-to-Speech (TTS) API. This package is compatible with both **Node.js** and **browser environments**, making it versatile for various use cases.
